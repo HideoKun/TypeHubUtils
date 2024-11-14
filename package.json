@@ -1,0 +1,15 @@
+{
+  "name": "typehubutils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "tsc --init",
+    "lint": "tsc --noEmit -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.6.3"
+  }
+}
