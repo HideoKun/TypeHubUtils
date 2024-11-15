@@ -13,3 +13,10 @@
   - safe
   - valueOf
   - flatten
+
+## tests
+
+- consistent
+- inconsistent
+- with consts literal
+- with @ts-expect-error
