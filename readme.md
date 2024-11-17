@@ -2,6 +2,8 @@
 
 - allow user to grow via helpful api (exact, exactArr, exactObj)
 - edu first
+- code is named and grouped
+- Ai chat ?
 
 ## organize by
 
@@ -13,6 +15,8 @@
   - safe
   - valueOf
   - flatten
+  - recursive
+  - visuals(typs display/ readability)
 
 ## tests
 

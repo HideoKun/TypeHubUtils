@@ -41,3 +41,5 @@ export type InConsistentDeepObj = {
     d1: (null | number)[];
   };
 };
+
+export type ArrObjArrObj = [{ a: [{ b: string }] }];
