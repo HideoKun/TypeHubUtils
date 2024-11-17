@@ -1,3 +1,5 @@
+# PURE TYPES
+
 ## goals
 
 - allow user to grow via helpful api (exact, exactArr, exactObj)
