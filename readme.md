@@ -18,7 +18,7 @@
   - valueOf
   - flatten
   - recursive
-  - visuals(typs display/ readability)
+  - visuals(types display/ readability /ux )
 
 ## tests
 
