@@ -1,5 +1,5 @@
 import type { InferPost, InferPre } from "../../string";
-import type { ArrObjArrObj, ConsistentDeepObj } from "../../testData";
+import type { ConsistentDeepObj } from "../../testData";
 import type { DecrementDepth, GetObjPaths } from "../utils/getObjectPaths";
 
 type HasMiddleDot<T extends string> = T extends `${string}.${string}`
@@ -29,11 +29,11 @@ export type SafePick<
 // @ts-expect-error
 type A = SafePick<ConsistentDeepObj, "b.b1.c">;
 //   ^?
-type B = SafePick<ConsistentDeepObj, "a">;
+// type B = SafePick<ConsistentDeepObj, "a">;
 //   ^?
 // TODO: should we preserve object structure?
-type C = SafePick<ConsistentDeepObj, "a" | "b.b2">;
+// type C = SafePick<ConsistentDeepObj, "a" | "b.b2">;
 //   ^?
 
-type D = SafePick<ArrObjArrObj, "0">;
+// type D = SafePick<ArrObjArrObj, "0">;
 //   ^?
