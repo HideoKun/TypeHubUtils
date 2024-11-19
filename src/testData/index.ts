@@ -43,3 +43,5 @@ export type InConsistentDeepObj = {
 };
 
 export type ArrObjArrObj = [{ a: [{ b: string }] }];
+
+export type ObjUnion = { a: string } | { b: number } | { c: boolean };
