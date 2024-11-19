@@ -1,4 +1,4 @@
-import type { Primitive } from "./primitives";
+import type { PRIMITIVE } from "./primitives";
 import type { StrictObject } from "./strict";
 
-export type NonArray = StrictObject | Primitive;
+export type NON_ARRAY = StrictObject | PRIMITIVE;

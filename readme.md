@@ -22,6 +22,7 @@
 - type function
 - dedicated data type (object, array, string etc)
 - keywords
+  - universal
   - deep
   - safe
   - valueOf
@@ -37,8 +38,7 @@
 - with @ts-expect-error
 
 
-##
+## other
 
 - definition of done
-- @konrad: gdzie zacząć
--
+

@@ -1,14 +1,11 @@
-import { expectTypeOf, test } from 'vitest';
+import { expectTypeOf, it } from 'vitest';
 import type { Maybe } from '.';
 
-let str: string | undefined = 'hello';
+let str: Maybe<string> = 'hello';
 
-test('Maybe Tests', () => {
+it('should work', () => {
   expectTypeOf(str).toEqualTypeOf<string>()
   expectTypeOf(str).toMatchTypeOf<Maybe<string>>()
-
-  // expectTypeOf(Maybe<string>).toBeFunction()
-  // expectTypeOf(mount).parameter(0).toMatchTypeOf<{ name: string }>()
 
   // assertType(mount({ name: 42 }))
 })

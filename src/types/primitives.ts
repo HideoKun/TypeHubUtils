@@ -3,6 +3,6 @@
 
 // TODO: missing types for symbol, bigint, function, etc.
 export type NIL =  null | undefined;
-export type Primitive = string | number | boolean | NIL;
+export type PRIMITIVE = string | number | boolean | NIL;
 
 

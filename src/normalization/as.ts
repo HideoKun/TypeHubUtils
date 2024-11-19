@@ -13,17 +13,18 @@ export type As<A, B> = [A] extends [B]
 
 // TESTS
 
-type X = { x: string, y: number }
-type Y =  { z?: boolean }
-type Z = {  a: number }
+type A = { x: string, y: number }
+type B =  { z?: boolean }
+type C = {  a: number }
 
-type A  = X  & Y & Z
-type Combo = {
+type ABC  = A  & B & C
+
+type ReplacementType = {
   x: string,
   y: number,
   z?: boolean,
   a: number
 }
 
-type Check = As<Combo, A>
+type TestUpdatedReference = As<ABC, ReplacementType>
 //   ^?
