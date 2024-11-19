@@ -1,3 +1,12 @@
+<!-- Build & Test Workflow Status -->
+[![Build & Test](https://github.com/HideoKun/TypeHubUtils/actions/workflows/node.js.yml/badge.svg)](https://github.com/HideoKun/TypeHubUtils/actions/workflows/node.js.yml)
+
+<!-- Additional Badges -->
+[![License](https://img.shields.io/github/license/HideoKun/TypeHubUtils)](https://github.com/HideoKun/TypeHubUtils/blob/main/LICENSE)
+[![Issues](https://img.shields.io/github/issues/HideoKun/TypeHubUtils)](https://github.com/HideoKun/TypeHubUtils/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/HideoKun/TypeHubUtils)](https://github.com/HideoKun/TypeHubUtils/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/HideoKun/TypeHubUtils)](https://github.com/HideoKun/TypeHubUtils/commits/main)
+
 # PURE TYPES
 
 ## goals
@@ -26,3 +35,10 @@
 - inconsistent
 - with consts literal
 - with @ts-expect-error
+
+
+##
+
+- definition of done
+- @konrad: gdzie zacząć
+-
