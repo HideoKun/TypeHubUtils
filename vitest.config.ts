@@ -3,7 +3,10 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    css: false // This disables CSS processing during tests
+    css: false, // This disables CSS processing during tests,
+    coverage: {
+      reporter: ['text', 'json', 'html', 'lcov'],
+    },
   },
   //
   css: {
