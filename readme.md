@@ -21,6 +21,12 @@
 - always add js doc (describe usage)
 - always describe input args (T extends string etc)
 
+## Usage
+- make it work
+- test it with abstract stuff
+- hack it -> new usages (SliceFront + prefix)
+
+
 ### Refs
 TODO: String Methods from:
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
@@ -48,7 +54,6 @@ TODO: String Methods from:
 - inconsistent
 - with consts literal
 - with @ts-expect-error
-
 
 ## other
 - definition of done
