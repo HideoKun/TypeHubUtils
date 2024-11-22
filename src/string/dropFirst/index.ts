@@ -1,4 +1,4 @@
-import type { IsStringLiteral } from "../utils"
+import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
  * A type that removes the first character from a string literal type `Str`.

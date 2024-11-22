@@ -7,9 +7,7 @@
  * @returns {S | never} - Returns `S` if it is a string literal type, otherwise `never`.
  */
 export type IsStringLiteral<S extends string> = S extends string
-    ? string extends S
-        ? never
-        : S
-    : never;
-
-
+  ? string extends S
+    ? never
+    : S
+  : never;

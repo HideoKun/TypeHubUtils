@@ -1,4 +1,4 @@
-import type { IsStringLiteral } from "../utils";
+import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
  * A type that reverses a string literal type `Str`.

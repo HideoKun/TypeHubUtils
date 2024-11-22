@@ -1,4 +1,4 @@
-import type { IsStringLiteral } from "../utils"
+import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
  * A type that slices the front part of a string literal type `Str` based on the length of `LengthPattern`.
