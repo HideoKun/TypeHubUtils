@@ -2,11 +2,13 @@ import { expectTypeOf, it } from 'vitest';
 import type { SliceFront } from '.';
 import type { L0, L1, L2, L3 } from '../../types';
 
-// TODO: what to do with '""'
-type TODO = SliceFront<string, 'xxx'>
-// TODO: this should return ABC not never
-type x = SliceFront<TestStr, L3>
 type TestStr = "ABC"
+
+// TODO: what to do with '""'
+type TODO1 = SliceFront<string, 'xxx'>
+// TODO: this should return ABC not never; fix with GetStrLength
+type TODO2 = SliceFront<TestStr, L3>
+//   ^?
 
 it('should work', () => {
   expectTypeOf<''>().toEqualTypeOf<SliceFront<TestStr, L0>>()
