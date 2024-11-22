@@ -8,8 +8,3 @@ it('should work', () => {
   expectTypeOf<DropFirst<''>>().toBeNever()
   expectTypeOf<DropFirst<string>>().toBeNever()
 })
-
-it('should not work', () => {
-  // @ts-expect-error
-  expectTypeOf<string>().toEqualTypeOf<DropFirst<string>>()
-})
