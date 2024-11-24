@@ -1,33 +1,32 @@
 import { expectTypeOf, it } from 'vitest';
 import type { SliceFront } from '.';
-import type { L0, L1, L2, L3 } from '../../types';
 
 type TestStr = "ABC"
 
 // TODO: what to do with '""'
-type TODO1 = SliceFront<string, 'xxx'>
+type TODO1 = SliceFront<string, 3>
 // TODO: this should return ABC not never; fix with GetStrLength
-type TODO2 = SliceFront<TestStr, L3>
+type TODO2 = SliceFront<TestStr, 3>
 //   ^?
 
 it('should work', () => {
-  expectTypeOf<''>().toEqualTypeOf<SliceFront<TestStr, L0>>()
-  expectTypeOf<'A'>().toEqualTypeOf<SliceFront<TestStr, L1>>()
-  expectTypeOf<'AB'>().toEqualTypeOf<SliceFront<TestStr, L2>>()
+  expectTypeOf<''>().toEqualTypeOf<SliceFront<TestStr, 0>>()
+  expectTypeOf<'A'>().toEqualTypeOf<SliceFront<TestStr, 1>>()
+  expectTypeOf<'AB'>().toEqualTypeOf<SliceFront<TestStr, 2>>()
 
-  expectTypeOf<SliceFront<string, L1>>().toBeNever()
+  expectTypeOf<SliceFront<string, 1>>().toBeNever()
 })
 
 it('should not work', () => {
   // @ts-expect-error
-  expectTypeOf<string>().toEqualTypeOf<SliceFront<string, L1>>()
+  expectTypeOf<string>().toEqualTypeOf<SliceFront<string, 1>>()
 
   // TODO: fix one below
   // @ts-expect-error
-  expectTypeOf<'ABC'>().toEqualTypeOf<SliceFront<TestStr, L3>>()
+  expectTypeOf<'ABC'>().toEqualTypeOf<SliceFront<TestStr, 3>>()
 
 })
 
 it('should add prefix to sliced part', () => {
-  expectTypeOf<'your-prefix-A'>().toEqualTypeOf<SliceFront<TestStr, L1, 'your-prefix-'>>()
+  expectTypeOf<'your-prefix-A'>().toEqualTypeOf<SliceFront<TestStr, 1, 'your-prefix-'>>()
 })

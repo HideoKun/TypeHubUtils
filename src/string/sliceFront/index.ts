@@ -1,3 +1,4 @@
+import type { StrLength } from "../../types";
 import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
@@ -10,14 +11,21 @@ import type { IsStringLiteral } from "../isStringLiteral";
  * @template Acc - The accumulator string that stores the sliced characters.
  * @returns {string | never} - Returns the accumulated string if `Str` is a string literal type, otherwise `never`.
  */
-export type SliceFront<
+export type _SliceFront<
   Str extends string,
   LengthPattern extends string,
   Acc extends string = "",
 > = IsStringLiteral<Str> extends Str
   ? Str extends `${infer StrFirst}${infer StrRest}`
     ? LengthPattern extends `${infer PatternFirst}${infer PatternRest}`
-      ? SliceFront<StrRest, PatternRest, `${Acc}${StrFirst}`>
+      ? _SliceFront<StrRest, PatternRest, `${Acc}${StrFirst}`>
       : Acc
     : never
   : never
+
+
+export type SliceFront<
+  Str extends string, //TODO: limit input to 50 chars
+  Num extends keyof StrLength,
+  Acc extends string = "",
+> = _SliceFront<Str, StrLength[Num], Acc>
