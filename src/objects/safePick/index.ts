@@ -1,26 +1,6 @@
-import type { InferPost, InferPre } from "../../string";
-import type { DecrementDepth, GetObjPaths } from "../utils/getObjectPaths";
+import type { StrictObject } from "../../types";
 
-type HasMiddleDot<T extends string> = T extends `${string}.${string}`
-  ? T
+export type SafePick<O extends StrictObject, K extends keyof O> = K extends keyof O
+  ? O[K]
   : never;
 
-// TODO: add array support? - adjust tests
-// TODO: add union support? - adjust tests
-// TODO: rename to SafeGet or Get
-export type SafePick<
-  Obj extends Record<string, any>,
-  Keys extends GetObjPaths<Obj, Depth>,
-  Depth extends number = 10
-> = Keys extends HasMiddleDot<Keys>
-  ? {
-      [K in InferPre<Keys>]: SafePick<
-        Obj[K],
-        Extract<InferPost<Keys>, GetObjPaths<Obj[K], DecrementDepth[Depth]>>,
-        DecrementDepth[Depth]
-      >;
-    }[InferPre<Keys>] // remove mid objects
-  : // Final Object Reading
-    {
-      [K in Keys]: Obj[K];
-    }[Keys];
