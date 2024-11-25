@@ -2,6 +2,7 @@ import type { ConsistentSimpleObject } from "../../../testData/index";
 import type { ExactObj } from "./exactObj";
 import type { ExactUnion } from "./exactUnion";
 
+// TODO: move to ./universal
 export type Exact<A, B = never> = [A] extends [B]
   ? ExactUnion<A, B>
   : A extends any[]

@@ -1,3 +1,4 @@
+// TODO: IsExactUnion -> boolean
 export type ExactUnion<A, B> = [A] extends [B]
   ? [B] extends [A]
     ? A
