@@ -23,7 +23,6 @@ export type _SliceFront<
     : never
   : never
 
-
 export type SliceFront<
   Str extends string, //TODO: limit input to 50 chars
   Num extends keyof StrLength,
