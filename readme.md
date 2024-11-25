@@ -11,6 +11,7 @@
 # PURE TYPES
 
 ## goals
+- make it friendly
 - allow user to grow via helpful api (exact, exactArr, exactObj)
 - edu first
 - code is named and grouped

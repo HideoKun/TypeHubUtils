@@ -1,6 +1,6 @@
 import { expectTypeOf, it } from "vitest";
+import type { SafeExtract } from ".";
 import type { ConsistentSimpleObject } from "../../testData";
-import type { SafeExtract } from "./safeExtract";
 
 it("should work", () => {
   expectTypeOf<string>().toEqualTypeOf<
