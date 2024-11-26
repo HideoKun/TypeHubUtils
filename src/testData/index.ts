@@ -1,3 +1,5 @@
+export type SimpleUnion = "a" | "b" | "c";
+
 export type ConsistentSimpleObject = {
   a: string;
   b: number;

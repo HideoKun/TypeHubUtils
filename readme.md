@@ -11,10 +11,31 @@
 # PURE TYPES
 
 ## goals
+- make it friendly
 - allow user to grow via helpful api (exact, exactArr, exactObj)
 - edu first
 - code is named and grouped
 - Ai chat ?
+
+## GuideLines
+- one func per file + tests
+- always add js doc (describe usage)
+- always describe input args (T extends string etc)
+
+## Usage
+- make it work
+- test it with abstract stuff
+- hack it -> new usages (SliceFront + prefix)
+
+
+### Refs
+TODO: String Methods from:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+- https://ramdajs.com/docs/#toString
+- https://lodash.com/docs/4.17.15#camelCase
+- https://github.com/panzerdp/voca?tab=readme-ov-file#functions
+- https://vocajs.pages.dev/#last
+
 
 ## organize by
 - type
@@ -35,7 +56,5 @@
 - with consts literal
 - with @ts-expect-error
 
-
 ## other
 - definition of done
-
