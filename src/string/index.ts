@@ -33,34 +33,6 @@ export type InferPost<
   Separator extends string = "."
 > = Str extends `${string}${Separator}${infer Post}` ? Post : never;
 
-type TrimStart<
-  T extends string,
-  Space extends string = " "
-> = T extends `${Space}${infer U}` ? TrimStart<U> : T;
-
-type CheckTrimStart = TrimStart<"  Test   ">;
-//    ^?
-
-type TrimEnd<
-  T extends string,
-  Space extends string = " "
-> = T extends `${infer U}${Space}` ? TrimEnd<U> : T;
-
-type CheckTrimEnd = TrimEnd<"  Test   ">;
-//    ^?
-
-type Trim<
-  T extends string,
-  Space extends string = " "
-> = T extends `${Space}${infer U}`
-  ? Trim<U>
-  : T extends `${infer U}${Space}`
-  ? Trim<U>
-  : T;
-
-type CheckTrim = Trim<"  Test   ">;
-//    ^?
-
 /** --------------------------------
 ## GuideLines
 
