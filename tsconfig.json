@@ -2,7 +2,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts"
-, "src/string/trim/index.test.ts"  ],
+  ],
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
