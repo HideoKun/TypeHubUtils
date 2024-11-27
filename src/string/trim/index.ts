@@ -1,4 +1,5 @@
 import type { WHITE_SPACE } from "../../types/string";
+import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
  * A type that removes all leading occurrences of characters specified by `Space` from the string literal type `S`.
@@ -16,7 +17,9 @@ import type { WHITE_SPACE } from "../../types/string";
 export type TrimStart<
   S extends string,
   Space extends string = WHITE_SPACE
-> = S extends `${Space}${infer U}` ? TrimStart<U> : S;
+> = IsStringLiteral<S> extends never
+  ? never
+  : S extends `${Space}${infer U}` ? TrimStart<U> : S;
 
 type CheckTrimStart = TrimStart<"  Test   ">;
 //    ^?
@@ -37,7 +40,9 @@ type CheckTrimStart = TrimStart<"  Test   ">;
 export type TrimEnd<
   S extends string,
   Space extends string = WHITE_SPACE
-> = S extends `${infer U}${Space}` ? TrimEnd<U> : S;
+> = IsStringLiteral<S> extends never
+  ? never
+  : S extends `${infer U}${Space}` ? TrimEnd<U> : S;
 
 type CheckTrimEnd = TrimEnd<"  Test   ">;
 //    ^?
@@ -58,7 +63,9 @@ type CheckTrimEnd = TrimEnd<"  Test   ">;
 export type Trim<
   S extends string,
   Space extends string = WHITE_SPACE
-> = TrimStart<TrimEnd<S, Space>, Space>;
+> = IsStringLiteral<S> extends never
+  ? never
+  : TrimStart<TrimEnd<S, Space>, Space>;
 
 type CheckTrim = Trim<"  Test   ">;
 //    ^?
