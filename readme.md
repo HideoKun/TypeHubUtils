@@ -16,6 +16,11 @@
 - edu first
 - code is named and grouped
 - Ai chat ?
+- describe lib pattern in docs:
+  - predicates: validator + true/false
+  - filters: no validation, return org type
+  - two step pattern, for optional args (no default args policy)
+
 
 ## GuideLines
 - one func per file + tests
