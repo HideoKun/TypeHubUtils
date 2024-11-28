@@ -1,28 +1,23 @@
 import { expectTypeOf, it } from "vitest";
-import type { StartsWith, EndsWith} from ".";
+import type { StartsWith } from ".";
 
 type TestStr = "Hello, World!";
 
-it("should work", () => {
+it("should work for args", () => {
   expectTypeOf<"Hello">().toEqualTypeOf<StartsWith<TestStr, "Hello">>();
-  expectTypeOf<"World!">().toEqualTypeOf<EndsWith<TestStr, "World!">>();
-
-  expectTypeOf<StartsWith<string, string>>().toBeNever();
-  expectTypeOf<EndsWith<string, string>>().toBeNever();
-
 });
 
-it("shouldn't work", () => {
+it("should not work for args", () => {
   // @ts-expect-error
   expectTypeOf<"Hello">().toEqualTypeOf<StartsWith<TestStr, "hello">>();
   // @ts-expect-error
-  expectTypeOf<"Hello">().toEqualTypeOf<StartsWith<TestStr, "World!">>();
+  expectTypeOf<"Hello">().toEqualTypeOf<StartsWith<TestStr, " hell">>();
   // @ts-expect-error
   expectTypeOf<"Hello">().toEqualTypeOf<StartsWith<TestStr, "42">>();
   // @ts-expect-error
-  expectTypeOf<"World!">().toEqualTypeOf<EndsWith<TestStr, "world!">>();
-  // @ts-expect-error
-  expectTypeOf<"World!">().toEqualTypeOf<EndsWith<TestStr, "Hello">>();
-  // @ts-expect-error
-  expectTypeOf<"World!">().toEqualTypeOf<EndsWith<TestStr, "42">>();
+  expectTypeOf<"Hello">().toEqualTypeOf<StartsWith<TestStr, 42>>();
+});
+
+it("should return never", () => {
+  expectTypeOf<StartsWith<string, string>>().toBeNever();
 });
