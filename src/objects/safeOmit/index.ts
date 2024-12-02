@@ -15,11 +15,12 @@ export type _SafeOmit<O extends StrictObject, K extends keyof O> = {
  * @template K - The keys to omit from the object type `T`.
  * @returns {object | never} - Returns the object type without the specified keys if `T` is an object type, otherwise `never`.
  */
-export type SafeOmit<
-  O extends StrictObject,
-  K extends keyof O,
-> = [K] extends [keyof O]
-  ? [keyof O] extends [K]
-    ? never
-    : _SafeOmit<O, K>
-  : never
+export type SafeOmit<O extends StrictObject, K extends keyof O> = [K] extends [
+  never,
+]
+  ? "Broken Input Arg" // TODO: use isNever
+  : [K] extends [keyof O]
+    ? [keyof O] extends [K]
+      ? never
+      : _SafeOmit<O, K>
+    : never;

@@ -11,10 +11,12 @@
     "prepare": "husky install"
   },
   "author": "Wojciech Morawski",
-  "license": "ISC",
+  "license": "MIT",
   "lint-staged": {
-    "*.ts": "eslint --cache --fix && npm run test",
-    "*.{ts ,md}": "prettier --write"
+    "*.ts": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "typescript": "^5.6.3"

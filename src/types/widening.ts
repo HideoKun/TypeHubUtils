@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 // TODO: rethink array usage
 // TODO: rethink object usage
 // TODO: add class support
 // TODO: add symbol support
-
 
 /**
  *
@@ -13,30 +13,38 @@
  * apply widening to a type
  */
 
-export type Wide<T> =
-  | T extends string ? string
-  : T extends number ? number
-  : T extends boolean ? boolean
-  : T extends (infer A)[] ? Wide<A>
-  // NILs
-  : T extends null ? null
-  : T extends undefined ? undefined
-  // OBJECTS
-  : T extends object? object
-  : never;
+export type Wider<T> =
+  //
+  T extends string
+    ? string
+    : T extends number
+      ? number
+      : T extends boolean
+        ? boolean
+        : T extends (infer A)[]
+          ? Wider<A>
+          : // NILs
+            T extends null
+            ? null
+            : T extends undefined
+              ? undefined
+              : // OBJECTS
+                T extends object
+                ? object
+                : never;
 
-// TESTS
-type a = Wide<'a'>
+// TODO: TESTS
+type a = Wider<"a">;
 //   ^?
-type b = Wide<0>
+type b = Wider<0>;
 //   ^?
-type c = Wide<true>
+type c = Wider<true>;
 //   ^?
-type d = Wide<{ a: 1}> // TODO: fix, keep object, resolve value to Wide<Values>
+type d = Wider<{ a: 1 }>; // TODO: fix, keep object, resolve value to Wide<Values>
 //   ^?
-type e = Wide<string[]>
+type e = Wider<string[]>;
 //   ^?
-type f = Wide<Array<string[]>>
+type f = Wider<Array<string[]>>;
 //   ^?
 
 // TODO: support other types

@@ -9,7 +9,7 @@ import type { ValueOf } from "../valueOf";
  */
 export type GetKeyByValue<
   O extends StrictObject,
-  V extends ValueOf<O>
-> = keyof{
-  [K in keyof O as O[K] extends V ? K : never]: never // TODO: rethink
-}
+  V extends ValueOf<O>,
+> = keyof {
+  [K in keyof O as O[K] extends V ? K : never]: never; // TODO: rethink
+};
