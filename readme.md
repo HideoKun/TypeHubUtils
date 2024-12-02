@@ -36,8 +36,6 @@
 - test it with abstract stuff
 - hack it -> new usages (SliceFront + prefix)
 
-.
-
 ### Refs
 
 TODO: String Methods from:
