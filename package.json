@@ -6,10 +6,6 @@
   "scripts": {
     "lint": "tsc --noEmit",
     "test": "vitest --config ./vitest.config.ts",
-    "init": "tsc --init",
-    "type-coverage": "type-coverage --detail --strict --debug",
-    "ts-coverage": "typescript-coverage-report",
-    "test-old": "tsd --files ./src/**/*.ts",
     "coverage:upload": "codecov -f coverage/lcov.info"
   },
   "author": "",
@@ -20,12 +16,6 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^2.1.5",
     "codecov": "^3.8.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "semantic-ui-react": "^2.1.5",
-    "tsd": "^0.31.2",
-    "type-coverage": "^2.29.7",
-    "typescript-coverage-report": "^1.1.0",
     "vitest": "^2.1.5"
   }
 }
