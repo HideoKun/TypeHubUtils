@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "tsc --noEmit",
+    "lint:ts": "tsc --noEmit",
+    "lint:es": "eslint ./src",
     "test": "vitest --config ./vitest.config.ts",
-    "coverage:upload": "codecov -f coverage/lcov.info"
+    "coverage:upload": "codecov -f coverage/lcov.info",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +16,20 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@vitest/coverage-v8": "^2.1.5",
     "codecov": "^3.8.2",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "prettier": "3.4.1",
+    "typescript-eslint": "^8.16.0",
     "vitest": "^2.1.5"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix",
+    "*.{ts ,md}": "prettier --write"
   }
 }
