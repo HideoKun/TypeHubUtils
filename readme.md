@@ -12,7 +12,7 @@
 
 # PURE TYPES
 
-## goals
+## Goals
 
 - make it friendly
 - allow user to grow via helpful api (exact, exactArr, exactObj)
