@@ -10,3 +10,12 @@ it("should work", () => {
   expectTypeOf<Includes<"teczuszka", "nic">>().toEqualTypeOf<false>();
   expectTypeOf<Includes<"maciuś", "s">>().toEqualTypeOf<false>();
 });
+
+it("should not work", () => {
+  // @ts-expect-error
+  expectTypeOf<Includes<"belladonna", "xxx">>().toEqualTypeOf<true>();
+  // @ts-expect-error
+  expectTypeOf<Includes<"teczuszka", "nic">>().toEqualTypeOf<true>();
+  // @ts-expect-error
+  expectTypeOf<Includes<"maciuś", "s">>().toEqualTypeOf<true>();
+});
