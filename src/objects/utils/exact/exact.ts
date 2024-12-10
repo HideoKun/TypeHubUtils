@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ConsistentSimpleObject } from "../../../testData/index";
 import type { ExactObj } from "./exactObj";
-import type { ExactUnion } from "./exactUnion";
+import type { IsExactUnion } from "./exactUnion";
 
 // TODO: move to ./universal
 export type Exact<A, B = never> = [A] extends [B]
-  ? ExactUnion<A, B>
+  ? IsExactUnion<A, B>
   : A extends unknown[]
     ? never
     : A extends object
