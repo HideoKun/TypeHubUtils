@@ -10,25 +10,48 @@
 [![Pull Requests](https://img.shields.io/github/issues-pr/HideoKun/TypeHubUtils)](https://github.com/HideoKun/TypeHubUtils/pulls)
 [![Last Commit](https://img.shields.io/github/last-commit/HideoKun/TypeHubUtils)](https://github.com/HideoKun/TypeHubUtils/commits/main)
 
-# PURE TYPES
+<p align="center">
+  <img src="logo.svg" width="200px" align="center" alt="Pure Types Logo" />
+  <h1 align="center">PureTypes</h1>
+</p>
 
 ## Goals
 
 - make it friendly
-- allow user to grow via helpful api (exact, exactArr, exactObj)
+- allow user to grow via helpful api (exactUnion, exactFunc, exactArr, exactObj)
 - edu first
-- code is named and grouped
-- Ai chat ?
-- describe lib pattern in docs:
-  - predicates: validator + true/false
-  - filters: no validation, return org type
-  - two step pattern, for optional args (no default args policy)
 
 ## GuideLines
 
+### Code
+
+- ignore performance, praise readability!!!
+- always describe generic type args (T extends string)
+- always use Safe/Close front func wrapper (ex `Func<'x'>`) and UnSafe/Open main func (ex `Func<T, '', []>`) -> Partial Type Application
+- when logic is messy extract it to new named func, avoid [this](https://github.com/sindresorhus/type-fest/blob/main/source/paths.d.ts#L123)
+- when both logic branches are invoking same func compress them to one func helpers for picking arg values
+- if there is to many args in one func, try to use props object to
+
+### Files
+
 - one func per file + tests
-- always add js doc (describe usage)
-- always describe input args (T extends string etc)
+- always add js doc (describe usage and input)
+
+### Dirs
+
+```
+/someDir
+  /safe
+  /unSafe
+```
+
+vs
+
+```
+Func/Safe
+_Func/UnSafeFunc
+_Helpers/Utils
+```
 
 ## Usage
 
@@ -46,26 +69,13 @@ TODO: String Methods from:
 - https://github.com/panzerdp/voca?tab=readme-ov-file#functions
 - https://vocajs.pages.dev/#last
 
-## organize by
-
-- type
-- type function
-- dedicated data type (object, array, string etc)
-- keywords
-  - universal
-  - deep
-  - safe
-  - valueOf
-  - flatten
-  - recursive
-  - visuals(types display/ readability /ux )
-
 ## tests
 
 - consistent
 - inconsistent
 - with consts literal
 - with @ts-expect-error
+- with never
 
 ## other
 
