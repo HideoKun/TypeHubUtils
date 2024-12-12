@@ -13,23 +13,23 @@
  * apply widening to a type
  */
 
+// operator?
 export type Wider<T> =
-  //
+  // PRIMITIVES
   T extends string
     ? string
     : T extends number
       ? number
       : T extends boolean
         ? boolean
-        : T extends (infer A)[]
-          ? Wider<A>
-          : // NILs
-            T extends null
-            ? null
-            : T extends undefined
-              ? undefined
-              : // OBJECTS
-                T extends object
+        : T extends null
+          ? null
+          : T extends undefined
+            ? undefined
+            : // OBJECTS
+              T extends (infer A)[]
+              ? Wider<A>
+              : T extends object
                 ? object
                 : never;
 

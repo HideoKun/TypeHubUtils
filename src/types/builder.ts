@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { ExactUnion } from "../objects/utils";
+import type { IsExactUnion } from "../objects/utils";
 import type { IsNever } from "../predicates/is";
 import type { NEVER_ERROR, NON_HOMOGENIC_ERROR } from "./brokenType";
 import type { ALL_TYPES } from "./primitives";
@@ -17,19 +17,20 @@ export type _AnyMatch<U, T> = U extends T ? true : false;
 - is assginable to anything
 */
 
-export type IsHomogenic<T, U> =
-  T extends Wider<U>
+export type IsHomogenic<All, T> =
+  All extends Wider<T> // 'a'
     ? // TODO: add Wider<T> for boolean -> true | false, so conditional type dist can be removed
-      ExactUnion<T, Wider<U>>
+      IsExactUnion<All, Wider<T>>
     : never;
 
-type X = IsHomogenic<string | number | boolean, "string" | "number">;
+type X = IsHomogenic<string | number, string>;
 //   ^?
 
 type XB = IsHomogenic<string | number | boolean, true | "number">;
 //   ^?
 
-type Z = ExactUnion<boolean, Wider<boolean>>;
+type Z = IsExactUnion<string | number | boolean, "string" | "number">;
+//   ^?
 
 type XBT = IsHomogenic<string | number | boolean, boolean>;
 //   ^?
@@ -41,11 +42,12 @@ type XX = IsHomogenic<string | number, Exclude<ALL_TYPES, string>>;
 // TODO: Pattern: Progressive Type Definition
 export type PredicateBuilder<T, Match> = [IsNever<T>] extends [true]
   ? NEVER_ERROR
-  : [T] extends [Match]
-    ? true
+  : [T] extends [Match] // wider?
+    ? // : T extends Match // wider?
+      true
     : // Is Any Kind Of Homogenic Union
       //: [T] extends [Exclude<ALL_TYPES, Match>]
       // upstream hack rejecting false and boolean
       IsHomogenic<ALL_TYPES, T> extends true // [Exclude<ALL_TYPES, Match>]
-      ? false
+      ? false // 1 | 'a'
       : NON_HOMOGENIC_ERROR;
