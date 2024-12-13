@@ -1,6 +1,22 @@
 import type { PredicateBuilder } from "../types/builder";
 
 export type IsNever<T> = [T] extends [never] ? true : false;
+export type IsAny<T> = 0 extends 1 & T ? true : false;
+export type IsUnknown<T> = [T] extends [unknown] ? true : false;
+
+export type IsOpenType<T> =
+  IsNever<T> extends true
+    ? true
+    : IsUnknown<T> extends true
+      ? true
+      : IsAny<T> extends true
+        ? true
+        : false;
+
+// unions are computed before passing to function
+// type a = string | any | never;
+// type b = IsOpenType<any>; // true
+//   ^?
 
 export type IsString<T> = PredicateBuilder<T, string>;
 export type IsNumber<T> = PredicateBuilder<T, number>;
