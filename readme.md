@@ -18,19 +18,81 @@
 ## Goals
 
 - make it friendly
-- allow user to grow via helpful api (exactUnion, exactFunc, exactArr, exactObj)
+- allow user to grow via helpful api
 - edu first
+
+## Architecture
+
+### Core Ideas
+
+- Great Docs
+- `strict` is not enough
+- `OpenType` (`any`, `unknown`, `never`) exclusion
+- Error Handling (branded types) as way to communicate to user more than 'never'
+
+### Structure/ Convention
+
+```ts
+Type/
+- name: only in uppercase -> All_CAPS
+- only static types (no functions here)
+
+Operators/
+- in: might use OpenType as input
+- out: non error
+- name: simple and short, prefix wih $ => $Maybe
+- simple, language like, single argument functions
+- universal/ not specialized (for arr, obj, func etc)
+  - what to do with $ExactObj ?
+
+Predicates/
+- in: exclude OpenType
+- out: boolean | error
+- name: use is/has as prefix => IsString
+
+Filters/
+- Pick, Omit, Exclude, Extract
+
+Transformers/
+  String/
+  Number/
+  Object/
+  etc/
+- in: exclude OpenType, provide validation => Test<Str extends string>
+- all real challenges (mapped obj, recurrence)
+- name: action + Type => ReverseString, StringToArr, ArrToString
+
+```
 
 ## GuideLines
 
 ### Code
 
+Bad - non meaningful type names
+
+```ts
+type Test<T extends string, U extends number, V extends boolean>
+```
+
+Good - para [Hungarian_notation](https://en.wikipedia.org/wiki/Hungarian_notation)
+
+```ts
+type Test<
+  Str extends string,
+  Num extends number,
+  Bool extends boolean,
+  Match extends string
+>
+```
+
+- $Operator, Func, \_UnSafeFunc
 - ignore performance, praise readability!!!
 - always describe generic type args (T extends string)
 - always use Safe/Close front func wrapper (ex `Func<'x'>`) and UnSafe/Open main func (ex `Func<T, '', []>`) -> Partial Type Application
 - when logic is messy extract it to new named func, avoid [this](https://github.com/sindresorhus/type-fest/blob/main/source/paths.d.ts#L123)
 - when both logic branches are invoking same func compress them to one func helpers for picking arg values
 - if there is to many args in one func, try to use props object to
+-
 
 ### Files
 

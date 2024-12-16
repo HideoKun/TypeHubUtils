@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-// TODO: rethink array usage
-// TODO: rethink object usage
 // TODO: add class support
 // TODO: add symbol support
 
@@ -13,8 +11,8 @@
  * apply widening to a type
  */
 
-// operator?
-export type Wider<T> =
+// TODO: what about open type?
+export type $Wide<T> =
   // PRIMITIVES
   T extends string
     ? string
@@ -28,23 +26,23 @@ export type Wider<T> =
             ? undefined
             : // OBJECTS
               T extends (infer A)[]
-              ? Wider<A>
+              ? $Wide<A>
               : T extends object
                 ? object
                 : never;
 
 // TODO: TESTS
-type a = Wider<"a">;
+type a = $Wide<"a">;
 //   ^?
-type b = Wider<0>;
+type b = $Wide<0>;
 //   ^?
-type c = Wider<true>;
+type c = $Wide<true>;
 //   ^?
-type d = Wider<{ a: 1 }>; // TODO: fix, keep object, resolve value to Wide<Values>
+type d = $Wide<{ a: 1 }>; // TODO: fix, keep object, resolve value to Wide<Values>
 //   ^?
-type e = Wider<string[]>;
+type e = $Wide<string[]>;
 //   ^?
-type f = Wider<Array<string[]>>;
+type f = $Wide<Array<string[]>>;
 //   ^?
 
 // TODO: support other types

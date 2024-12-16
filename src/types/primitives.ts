@@ -9,3 +9,18 @@ export type COMPLEX = object | symbol | Function;
 export type ALL_TYPES = PRIMITIVE | COMPLEX; // TODO: avoid any-like types
 
 // type ALL_TYPES = string | number | boolean | symbol | bigint | null | undefined | object | Function;
+
+// Object
+// Function
+// Date
+// Error
+// RegExp
+// Map
+// WeakMap
+// Set
+// WeakSet
+// Array
+// ReadonlyArray
+// Promise
+// Symbol
+// BigInt

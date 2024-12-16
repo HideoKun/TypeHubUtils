@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { IsExactUnion } from "../objects/utils";
-import type { IsNever } from "../predicates/is";
-import type { NEVER_ERROR, NON_HOMOGENIC_ERROR } from "./brokenType";
-import type { ALL_TYPES } from "./primitives";
-import type { Wider } from "./widening";
+import type { $Wide } from "../operators/wide";
+import type { NEVER_ERROR, NON_HOMOGENIC_ERROR } from "../types/errors";
+import type { ALL_TYPES } from "../types/primitives";
+import type { IsNever } from "./is";
+import type { IsEqual } from "./isEqual";
 
 // operator
 // boolean switch
@@ -17,10 +17,16 @@ export type _AnyMatch<U, T> = U extends T ? true : false;
 - is assginable to anything
 */
 
+// TODO: this is broken, isHomogenic vs isWideHomogenic
+/*
+- collect all types
+- try to assign to each type
+*/
+
 export type IsHomogenic<All, T> =
-  All extends Wider<T> // 'a'
+  All extends $Wide<T> // 'a'
     ? // TODO: add Wider<T> for boolean -> true | false, so conditional type dist can be removed
-      IsExactUnion<All, Wider<T>>
+      IsEqual<All, $Wide<T>>
     : never;
 
 type X = IsHomogenic<string | number, string>;
@@ -29,13 +35,13 @@ type X = IsHomogenic<string | number, string>;
 type XB = IsHomogenic<string | number | boolean, true | "number">;
 //   ^?
 
-type Z = IsExactUnion<string | number | boolean, "string" | "number">;
+type Z = IsEqual<string | number | boolean, "string" | "number">;
 //   ^?
 
 type XBT = IsHomogenic<string | number | boolean, boolean>;
 //   ^?
 
-type Y = Wider<true>;
+type Y = $Wide<true>;
 type XX = IsHomogenic<string | number, Exclude<ALL_TYPES, string>>;
 //   ^?
 

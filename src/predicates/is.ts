@@ -1,22 +1,48 @@
-import type { PredicateBuilder } from "../types/builder";
+import type { NEVER_ERROR, NIL } from "../types";
+import type { PredicateBuilder } from "./builder";
 
 export type IsNever<T> = [T] extends [never] ? true : false;
-export type IsAny<T> = 0 extends 1 & T ? true : false;
-export type IsUnknown<T> = [T] extends [unknown] ? true : false;
 
-export type IsOpenType<T> =
-  IsNever<T> extends true
+// --- Nullability Predicates ---
+// TODO: possible redundancy []
+export type IsAny<T> = [IsNever<T>] extends [true]
+  ? NEVER_ERROR
+  : 0 extends 1 & T
     ? true
-    : IsUnknown<T> extends true
+    : false;
+
+export type IsUnknown<T> = [IsNever<T>] extends [true]
+  ? NEVER_ERROR
+  : [unknown] extends [T]
+    ? true
+    : false;
+
+export type IsOpenType<T> = [T] extends [never]
+  ? true
+  : 0 extends 1 & T // isAny
+    ? true
+    : [unknown] extends [T] // isUnknown
       ? true
-      : IsAny<T> extends true
-        ? true
-        : false;
+      : false;
 
 // unions are computed before passing to function
 // type a = string | any | never;
-// type b = IsOpenType<any>; // true
+// type b = IsOpenType<any | 1>; // true
 //   ^?
+
+export type IsNil<T> =
+  IsOpenType<T> extends true ? NEVER_ERROR : [T] extends [NIL] ? true : false;
+
+// --- Empty Predicates ---
+export type IsEmpty<T> =
+  IsOpenType<T> extends true
+    ? true
+    : // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+      [T] extends [{}]
+      ? true
+      : "isEmptyArr & isEmptyStr & isEmptyObj"; // isEmptyMap & isEmptySet
+
+// --- Type Predicates ---
 
 export type IsString<T> = PredicateBuilder<T, string>;
 export type IsNumber<T> = PredicateBuilder<T, number>;

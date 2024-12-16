@@ -1,13 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ALL_TYPES } from "../types";
-import type { PredicateBuilder } from "../types/builder";
+import type { PredicateBuilder } from "./builder";
 
-export type P<T> = PredicateBuilder<T, null>;
+/*
+- isFlat/Unary Union
+- isHomogenicUnion
+*/
+
+type IsBooleanX<T> = [true] extends [T]
+  ? [false] extends [T]
+    ? true
+    : false
+  : false;
+
+type XXX = IsBooleanX<boolean>;
+
+export type P<T> = PredicateBuilder<T, string>;
 
 type IsBooleanD = P<never>;
 //   ^?
 
-type IsBooleanA = P<"a" | "b">;
+type IsBooleanA = P<"a" | 1>;
 //   ^?
 
 type IsBooleanBbc = P<true | false>;
@@ -16,7 +29,7 @@ type IsBooleanBb = P<undefined | null>;
 //   ^?
 //   ^?
 
-type IsBooleanBc = P<boolean>;
+type IsBooleanBc = P<"null">;
 //   ^?
 
 // ------------------------------
