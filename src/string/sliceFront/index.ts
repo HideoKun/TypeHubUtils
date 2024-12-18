@@ -25,4 +25,4 @@ export type _SliceFront<
 export type SliceFront<Str extends string, Num extends number> =
   IsStringLiteral<Str> extends Str
     ? _SliceFront<Str, Num, []>
-    : EXPECT_LITERAL_ERROR<{ input: Str }>;
+    : EXPECT_LITERAL_ERROR;
