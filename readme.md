@@ -23,14 +23,48 @@
 
 ## Architecture
 
+### TODO
+
+- union approach?
+
+- getKeys
+- getReadonlyKeys
+- getOptionalKeys
+
 ### Core Ideas
 
 - Great Docs
 - `strict` is not enough
 - `OpenType` (`any`, `unknown`, `never`) exclusion
-- Error Handling (branded types) as way to communicate to user more than 'never'
+- Error Handling (branded types) as way to communicate to user more than `never`
+- never use `never`, `any` (and `unknown`?)
+- **use pre-computed types** (TailWind style) - { "declaration": true,"emitDeclarationOnly": true}
+- **Error** as a feature: use it to communicate with user
+- composition as a solution to complex problems (math, algs)
+
+```ts
+// Error
+
+type NewOpenTypeError<Value, Context extends string = ''> = {
+  __error: `do not use open type  as input`;
+  __url: 'www.wp.pl`;
+  __value: Value;
+  __context?: Context
+}
+
+type In<Value> = NewOpenTypeError<Value, 'In<> validation error'>
+```
+
+### Other Ideas
+
+- ## func types (rules): front/ back/ middle validation
+- in/out validation
+- recurrence as snippet/ pattern
+- type function composition
 
 ### Structure/ Convention
+
+#### Directories
 
 ```ts
 Type/
@@ -39,28 +73,55 @@ Type/
 
 Operators/
 - in: might use OpenType as input
-- out: non error
+- out: non error (should recover from open type)
+- front validation: none
+- middle validation: minimal
+- check: errors
 - name: simple and short, prefix wih $ => $Maybe
 - simple, language like, single argument functions
 - universal/ not specialized (for arr, obj, func etc)
   - what to do with $ExactObj ?
 
+Validators/
+- in: T (all types)
+- out: T | error
+- front validation: none
+- check: openType, errors
+- name: ValidateXXX/ InValidateXXX
+
 Predicates/
-- in: exclude OpenType
+- in: T (all types)
 - out: boolean | error
+- front validation: none
+- middle validation: full
+- check: openType, errors
+- conditional: [], helpers could use CTD
 - name: use is/has as prefix => IsString
 
 Filters/
-- Pick, Omit, Exclude, Extract
+- Pick, Omit, Non, Extract
 
 Transformers/
   String/
   Number/
   Object/
   etc/
-- in: exclude OpenType, provide validation => Test<Str extends string>
-- all real challenges (mapped obj, recurrence)
 - name: action + Type => ReverseString, StringToArr, ArrToString
+- in: Non-OpenType, provide validation => Test<Str extends string>
+- front validation: full
+- middle validation: full
+- all real challenges (mapped obj, recurrence)
+```
+
+#### Module
+
+```ts
+module/
+  ./index.ts
+    - pattern: in/ logic/ out
+    - use composition when possible:  C<B<A<T>>>
+  ./index.tests.ts
+    - test: open type, wrong values (type mismatch), empty values, func exploration
 
 ```
 

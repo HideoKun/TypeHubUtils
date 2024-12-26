@@ -1,6 +1,20 @@
+// Multi-error support, union is better, no middle ground
+// union is better thanks to lack of translation and openness
+export type ErrorType =
+  | { __type: "ValidationError"; __message: string }
+  | { __type: "NetworkError"; __message: string; __url: string }
+  | { __type: "SystemError"; __code: number };
+
 export type GenericError = {
   readonly __message: string;
   readonly __url: string;
+};
+
+export type MakeError<C, T> = {
+  readonly __message: "string;";
+  readonly __url: string;
+  context: C;
+  value: T;
 };
 
 export type NonErrorObj = object & { __message: never; __url: never }; // type: GenericError
@@ -18,6 +32,22 @@ export interface OPEN_TYPE_ERROR {
  */
 export interface NEVER_ERROR {
   readonly __message: "input: do not pass never as input";
+  readonly __url: "wwww.wp.pl";
+}
+
+/**
+ * @see www.wp.pl
+ */
+export interface ANY_ERROR {
+  readonly __message: "input: do not pass any as input";
+  readonly __url: "wwww.wp.pl";
+}
+
+/**
+ * @see www.wp.pl
+ */
+export interface UNKNOWN_ERROR {
+  readonly __message: "input: do not pass unknown as input";
   readonly __url: "wwww.wp.pl";
 }
 

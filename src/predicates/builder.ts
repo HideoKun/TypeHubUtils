@@ -2,7 +2,7 @@
 import type { $Wide } from "../operators/wide";
 import type { NEVER_ERROR, NON_HOMOGENIC_ERROR } from "../types/errors";
 import type { ALL_TYPES } from "../types/primitives";
-import type { IsNever } from "./is";
+import type { IsOpenType } from "./is";
 import type { IsEqual } from "./isEqual";
 
 // operator
@@ -46,7 +46,7 @@ type XX = IsHomogenic<string | number, Exclude<ALL_TYPES, string>>;
 //   ^?
 
 // TODO: Pattern: Progressive Type Definition
-export type PredicateBuilder<T, Match> = [IsNever<T>] extends [true]
+export type PredicateBuilder<T, Match> = [IsOpenType<T>] extends [true]
   ? NEVER_ERROR
   : [T] extends [Match] // wider?
     ? // : T extends Match // wider?
