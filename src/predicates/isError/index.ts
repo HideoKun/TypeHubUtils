@@ -1,15 +1,14 @@
-import type { isAssignable } from "../../operators/extends";
+import type { Extends } from "../../operators/extends";
 import type { GenericError, NEVER_ERROR } from "../../types";
 import type { IsOpenType } from "../is";
 
-// what should happen with unions?
-// how to fix this predicate?
+// IsError - doesnt work!
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type IsError<T> = T extends { [key: string]: any }
   ? // be carefull with unknown!!!!!!!
     // type IsError<T> = T extends { [key: `__${string}`]: any }
-    isAssignable<keyof GenericError, keyof T> extends true
+    Extends<keyof GenericError, keyof T> extends true
     ? true
     : false
   : false;

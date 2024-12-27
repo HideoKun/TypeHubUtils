@@ -6,8 +6,8 @@ import type {
   NIL,
   UNKNOWN_ERROR,
 } from "../types";
-import type { Validate } from "../validators";
-import type { PredicateBuilder } from "./builder";
+import type { Validate$ } from "../validators/validate";
+import type { Predicate } from "./predicate";
 
 export type $IsNever<T> = [T] extends [never] ? true : false;
 
@@ -51,18 +51,19 @@ high level
 
 //  how to join validate with_Bypass, Pipe
 // PTA!!! + callback hell
-type _IsPredX<T> = "your logic";
-type MonadChain<T> = T extends GenericError ? T : _IsPredX<T>;
-type IsPredX<T> = MonadChain<Validate<T>>;
+type Checked_YourLogic<T> = T extends string ? true : false;
+// monad chain of quarded funcs
+type MonadChain<T> = T extends GenericError ? T : Checked_YourLogic<T>;
+type IsPredX<T> = MonadChain<Validate$<T>>;
 type TestPred = IsPredX<"any">;
 //   ^?
 
 type pred<T> = C<B<A<T>>>;
 
-// monad/ bypass chain
-type A<T> = [T] extends [GenericError] ? T : $IsNever<T>;
-type B<T> = [T] extends [GenericError] ? T : $IsAnyE<T>;
-type C<T> = [T] extends [GenericError] ? T : $IsUnknownE<T>;
+// monad/ bypass chain of checked funcs
+type A<$T> = [$T] extends [never] ? $T : $IsNever<$T>;
+type B<$T> = [$T] extends [never] ? $T : $IsAnyE<$T>;
+type C<$T> = [$T] extends [never] ? $T : $IsUnknownE<$T>;
 
 // ABC is pipe pattern for single arity
 
@@ -94,9 +95,9 @@ export type IsEmpty<T> =
 
 // --- Type Predicates ---
 
-export type IsString<T> = PredicateBuilder<T, string>;
-export type IsNumber<T> = PredicateBuilder<T, number>;
-export type IsBoolean<T> = PredicateBuilder<T, boolean>;
+export type IsString<T> = Predicate<T, string>;
+export type IsNumber<T> = Predicate<T, number>;
+export type IsBoolean<T> = Predicate<T, boolean>;
 
 // export type IsFunction<T> = PredicateBuilder<T, Function> // strict func
 // export type IsObject<T> = PredicateBuilder<T, object> // strict object

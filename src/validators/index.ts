@@ -59,11 +59,3 @@ export type InValidateUnknown<T> = [IsError<T>] extends [true] // this is better
   : [unknown] extends [T]
     ? UNKNOWN_ERROR
     : T;
-
-export type Validate<T> = [T] extends [never] // isNever
-  ? NEVER_ERROR
-  : 0 extends 1 & T // isAny
-    ? ANY_ERROR
-    : [unknown] extends [T] // isUnknown
-      ? UNKNOWN_ERROR
-      : T;

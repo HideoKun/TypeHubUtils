@@ -10,12 +10,41 @@ export type GenericError = {
   readonly __url: string;
 };
 
-export type MakeError<C, T> = {
-  readonly __message: "string;";
-  readonly __url: string;
-  context: C;
-  value: T;
+type ErrorMessages = {
+  OpenTypeError: "input: is open types (any, unknown, never)";
+  NeverError: "input: do not pass never as input";
+  AnyError: "input: do not pass any as input";
+  UnknownError: "input: do not pass unknown as input";
+  MismatchError: "input: type mismatch";
 };
+
+type ErrorTypes = keyof ErrorMessages;
+
+export type NewError<
+  ErrorType extends ErrorTypes,
+  Context extends string,
+  Value,
+> = {
+  __type: ErrorType;
+  __message: ErrorMessages[ErrorType];
+  __url: string;
+  __context: Context;
+  __value: Value;
+};
+
+// ------------------------------
+
+export type NewOpenTypeError<Context extends string, Value> = NewError<
+  "OpenTypeError",
+  Context,
+  Value
+>;
+
+export type NewMismatchError<Context extends string, Value> = NewError<
+  "MismatchError",
+  Context,
+  Value
+>;
 
 export type NonErrorObj = object & { __message: never; __url: never }; // type: GenericError
 

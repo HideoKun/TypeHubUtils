@@ -15,9 +15,7 @@ import type { TrimStart } from "../trimStart";
  * @example
  * type CheckTrim = Trim<"  Hello World  ">; // Result: "Hello World"
  */
-export type Trim<
-  S extends string,
-  Space extends string = WHITE_SPACE
-> = IsStringLiteral<S> extends never
-  ? never
-  : TrimStart<TrimEnd<S, Space>, Space>;
+export type Trim<S extends string, Space extends string = WHITE_SPACE> =
+  IsStringLiteral<S> extends never
+    ? never
+    : TrimStart<TrimEnd<S, Space>, Space>;

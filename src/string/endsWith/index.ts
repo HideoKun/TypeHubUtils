@@ -1,4 +1,3 @@
-
 /**
  * A type that checks if the string literal type `S` ends with the string literal type `T`.
  * Type `T` could be single or multiple letter.
@@ -18,10 +17,11 @@
 
 import type { IsStringLiteral } from "../isStringLiteral";
 
-export type EndsWith<S extends string, T extends string> = IsStringLiteral<S> extends never
-  ? never
-  : IsStringLiteral<T> extends never
-  ? never
-  : S extends `${infer First}${T}`
-  ? T
-  : never;
+export type EndsWith<S extends string, T extends string> =
+  IsStringLiteral<S> extends never
+    ? never
+    : IsStringLiteral<T> extends never
+      ? never
+      : S extends `${infer First}${T}`
+        ? T
+        : never;

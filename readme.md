@@ -57,12 +57,22 @@ type In<Value> = NewOpenTypeError<Value, 'In<> validation error'>
 
 ### Other Ideas
 
+SM: TS standards and micro patterns:
+
+- E | T
+- variadic functions
+- PTA
+- upstream computation
+
 - ## func types (rules): front/ back/ middle validation
 - in/out validation
 - recurrence as snippet/ pattern
 - type function composition
 
 ### Structure/ Convention
+
+- Standard: Progressive Type Application (PTA): close pattern (no default values), open pattern (default values)
+- Standard: name: safe/ guard/ check vs safe/ front/ back (flag or func name?)
 
 #### Directories
 
@@ -107,6 +117,7 @@ Transformers/
   Object/
   etc/
 - name: action + Type => ReverseString, StringToArr, ArrToString
+- name: safe/ guard/ check vs safe/ front/ back (flag or func name?)
 - in: Non-OpenType, provide validation => Test<Str extends string>
 - front validation: full
 - middle validation: full

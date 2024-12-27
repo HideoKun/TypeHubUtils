@@ -14,12 +14,9 @@ import type { IsStringLiteral } from "../isStringLiteral";
  * type CheckTrimEnd = TrimEnd<"  Hello World  ">; // Result: "  Hello World"
  */
 
-export type TrimEnd<
-  S extends string,
-  Space extends string = WHITE_SPACE
-> = IsStringLiteral<S> extends never
-  ? never
-  : S extends `${infer U}${Space}`
-    ? TrimEnd<U>
-    : S;
-
+export type TrimEnd<S extends string, Space extends string = WHITE_SPACE> =
+  IsStringLiteral<S> extends never
+    ? never
+    : S extends `${infer U}${Space}`
+      ? TrimEnd<U>
+      : S;
