@@ -1,23 +1,72 @@
-import type { NEVER_ERROR, NIL } from "../types";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import type {
+  ANY_ERROR,
+  GenericError,
+  NEVER_ERROR,
+  NIL,
+  UNKNOWN_ERROR,
+} from "../types";
+import type { Validate } from "../validators";
 import type { PredicateBuilder } from "./builder";
 
-export type IsNever<T> = [T] extends [never] ? true : false;
+export type $IsNever<T> = [T] extends [never] ? true : false;
 
 // --- Nullability Predicates ---
 // TODO: possible redundancy []
-export type IsAny<T> = [IsNever<T>] extends [true]
-  ? NEVER_ERROR
+export type $IsAnyE<T> = [$IsNever<T>] extends [true]
+  ? ANY_ERROR
   : 0 extends 1 & T
     ? true
     : false;
 
-export type IsUnknown<T> = [IsNever<T>] extends [true]
-  ? NEVER_ERROR
-  : [unknown] extends [T]
-    ? true
-    : false;
+export type $IsUnknownE<T> = [$IsNever<T>] extends [true]
+  ? UNKNOWN_ERROR
+  : 0 extends 1 & T
+    ? false
+    : [unknown] extends [T]
+      ? true
+      : false;
 
-export type IsOpenType<T> = [T] extends [never]
+// doesnt work with any
+// type XX = $IsUnknownE<any>;
+//   ^?
+
+/*
+- missing erros
+- below func is better - less branches
+*/
+
+// no error on return - why? pattern?
+// non error validator
+// all validators should return boolean | error
+// - validate, verify
+
+/*
+
+high level
+- return error extends GenericError
+- calc one and use second func to return T ? T
+
+*/
+
+//  how to join validate with_Bypass, Pipe
+// PTA!!! + callback hell
+type _IsPredX<T> = "your logic";
+type MonadChain<T> = T extends GenericError ? T : _IsPredX<T>;
+type IsPredX<T> = MonadChain<Validate<T>>;
+type TestPred = IsPredX<"any">;
+//   ^?
+
+type pred<T> = C<B<A<T>>>;
+
+// monad/ bypass chain
+type A<T> = [T] extends [GenericError] ? T : $IsNever<T>;
+type B<T> = [T] extends [GenericError] ? T : $IsAnyE<T>;
+type C<T> = [T] extends [GenericError] ? T : $IsUnknownE<T>;
+
+// ABC is pipe pattern for single arity
+
+export type IsOpenType<T> = [T] extends [never] // isNever
   ? true
   : 0 extends 1 & T // isAny
     ? true
@@ -28,6 +77,7 @@ export type IsOpenType<T> = [T] extends [never]
 // unions are computed before passing to function
 // type a = string | any | never;
 // type b = IsOpenType<any | 1>; // true
+// type C  =IsOpenType<'' | unknown>
 //   ^?
 
 export type IsNil<T> =
