@@ -16,6 +16,8 @@ type ErrorMessages = {
   AnyError: "input: do not pass any as input";
   UnknownError: "input: do not pass unknown as input";
   MismatchError: "input: type mismatch";
+  OutputError: "output: open type";
+  NonLiteralError: "input: provided type is not literal";
 };
 
 type ErrorTypes = keyof ErrorMessages;

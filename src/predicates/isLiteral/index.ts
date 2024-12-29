@@ -7,22 +7,24 @@ import type { ValidateAll$ } from "../../validators/validateAll";
 // so no $ means: no input/ output check
 // - square
 
-export type $IsLiteral$<T, Match> = T extends Match
-  ? Match extends T
+// modes here
+
+export type _IsLiteral<T, Match> = [T] extends [Match]
+  ? [Match] extends [T]
     ? false
     : true
   : false;
 
-type In<E$, T, Match> = [E$] extends [never] ? $IsLiteral$<T, Match> : E$;
+type Try<$E, T, Match> = [$E] extends [never] ? _IsLiteral<T, Match> : $E;
 
-type Final<T$, Match> = In<
-  ValidateAll$<[T$, Match]>,
+type PreSet<T$, Match$> = Try<
+  ValidateAll$<[T$, Match$]>,
   //
   T$,
-  Match
+  Match$
 >;
 
-export type IsStringLiteral<T> = Final<T, string>;
+export type IsStringLiteral<T> = PreSet<T, string>;
 
 /*
 

@@ -1,8 +1,8 @@
 import type { ValidateAll$ } from "../../validators/validateAll";
-import type { ERROR, MODE } from "./config";
+import type { ERROR, PRED_MODE } from "./config";
 import type { Catch$ } from "./utils";
 
-export type $Predicate$<T, Match, Mode extends MODE = ERROR> = [T] extends [
+export type _Predicate<T, Match, Mode extends PRED_MODE = ERROR> = [T] extends [
   Match,
 ]
   ? true
@@ -10,13 +10,13 @@ export type $Predicate$<T, Match, Mode extends MODE = ERROR> = [T] extends [
     ? Catch$<T, Match> // never: reachable, but not single
     : false;
 
-type In<E, T, Match, Mode extends MODE = ERROR> = [E] extends [never]
-  ? $Predicate$<T, Match, Mode>
+type _Try<E, T, Match, Mode extends PRED_MODE = ERROR> = [E] extends [never]
+  ? _Predicate<T, Match, Mode>
   : E;
 
 // ------------------------------------------------
 
-export type Predicate<T, Match, Mode extends MODE = ERROR> = In<
+export type Predicate<T, Match, Mode extends PRED_MODE = ERROR> = _Try<
   ValidateAll$<[T, Match, Mode]>,
   //
   T,
