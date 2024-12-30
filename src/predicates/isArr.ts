@@ -1,4 +1,5 @@
-export type isArrOfType<Arr extends unknown[], Match> = Arr extends Match[]
+// TODO: validations is missing
+export type isArrOfType<Arr extends unknown[], Match> = [Arr] extends [Match[]]
   ? true
   : false;
 

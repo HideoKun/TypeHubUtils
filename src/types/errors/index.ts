@@ -18,12 +18,13 @@ type ErrorMessages = {
   MismatchError: "input: type mismatch";
   OutputError: "output: open type";
   NonLiteralError: "input: provided type is not literal";
+  EmptyStringError: "input: empty string";
 };
 
-type ErrorTypes = keyof ErrorMessages;
+// type ErrorTypes = keyof ErrorMessages;
 
 export type NewError<
-  ErrorType extends ErrorTypes,
+  ErrorType extends keyof ErrorMessages,
   Context extends string,
   Value,
 > = {

@@ -1,25 +1,12 @@
+import type { $Catch } from "../../operators/catch";
 import type { Validate$ } from "../../validators/validate";
+import type { _StrToArr_Back } from "./algo";
 
-export type $StrToArr$<
-  Str extends string,
-  Acc extends string[],
-> = Str extends `${infer First}${infer Rest}`
-  ? $StrToArr$<Rest, [...Acc, First]>
-  : Acc;
+type Try<Err$, Str> = [Err$] extends [never]
+  ? $Catch<_StrToArr_Back<Str>, "StrToArr">
+  : Err$;
 
-export type In<E$, Str extends string> = [E$] extends [never]
-  ? $StrToArr$<Str, []>
-  : E$;
+// filter Error before?
 
-// ------------------------------------------------
-/**
- * A type that coverts a string into array of chars
- *
- * @template Str - The string to change into array.
- * @returns {Array<string>} - Returns array of strings or an empty array for empty string
- */
-export type StrToArr<Str extends string> = In<
-  Validate$<Str>,
-  //
-  Str
->;
+export type StrToArr<Str extends string> = Try<Validate$<Str, "flat">, Str>;
+export type StrToArr_BACK<Str> = Try<Validate$<Str, "flat">, Str>;

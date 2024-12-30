@@ -23,7 +23,12 @@
 
 ## Architecture
 
+// PREDICATES RULES
+// - all type should be square, helpers should be singular
+
 ### TODO
+
+- union to tuple
 
 - union approach?
 
@@ -63,6 +68,8 @@ SM: TS standards and micro patterns:
 - variadic functions
 - PTA
 - upstream computation
+- $ for never (funcs, static types)
+- error with links to docs (good patterns)
 
 - ## func types (rules): front/ back/ middle validation
 - in/out validation
@@ -73,6 +80,7 @@ SM: TS standards and micro patterns:
 
 - Standard: Progressive Type Application (PTA): close pattern (no default values), open pattern (default values)
 - Standard: name: safe/ guard/ check vs safe/ front/ back (flag or func name?)
+- Standard: name/mode: CTD, BOX
 
 #### Directories
 

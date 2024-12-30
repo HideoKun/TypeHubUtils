@@ -1,12 +1,13 @@
+import type { _AssertError$ } from "../../assertions";
+import type { _FilterError$ } from "../../filters";
 import type { NewError } from "../../types/errors";
-import type { Validate$ } from "../validate";
 
-// like this or ? should we selected mode?
-// export type ValidateEmptyString<T> = [T] extends ['']
-export type _ValidateEmptyString<T> = T extends ""
-  ? NewError<"NonLiteralError", "ValidateEmptyString", T>
-  : never;
+type LocalValidateEmptyString<
+  T,
+  ErrContext extends string = "_ValidateEmptyString",
+> = T extends "" ? NewError<"EmptyStringError", ErrContext, T> : T;
 
-type _Try<$E, T> = [$E] extends [never] ? _ValidateEmptyString<T> : $E;
-
-export type ValidateEmptyString<T> = _Try<Validate$<T>, T>;
+// TODO: check with union mixed with errors
+export type _ValidateEmptyString<T> = [_AssertError$<T>] extends [never]
+  ? LocalValidateEmptyString<T>
+  : _FilterError$<T>; // TODO: this filter might be unnecessary
