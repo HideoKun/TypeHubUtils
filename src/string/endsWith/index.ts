@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * A type that checks if the string literal type `S` ends with the string literal type `T`.
  * Type `T` could be single or multiple letter.
@@ -15,7 +16,7 @@
  * type CheckEndsWith2 = EndsWith<"Hello, World!", "Hello">;  // Result: never
  */
 
-import type { IsStringLiteral } from "../isStringLiteral";
+import type { IsStringLiteral } from "../../predicates/isLiteral";
 
 export type EndsWith<S extends string, T extends string> =
   IsStringLiteral<S> extends never

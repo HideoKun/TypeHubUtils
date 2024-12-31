@@ -1,5 +1,5 @@
+import type { IsStringLiteral } from "../../predicates/isLiteral";
 import type { WHITE_SPACE } from "../../types";
-import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
  * A type that removes all leading occurrences of characters specified by `Space` from the string literal type `S`.

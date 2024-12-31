@@ -1,5 +1,5 @@
+import type { IsStringLiteral } from "../../predicates/isLiteral";
 import type { EXPECT_LITERAL_ERROR } from "../../types";
-import type { IsStringLiteral } from "../isStringLiteral";
 
 /**
  * A type that slices the front part of a string literal type `Str` based on the length of `LengthPattern`.

@@ -1,4 +1,5 @@
-import type { IsStringLiteral } from "../isStringLiteral";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import type { IsStringLiteral } from "../../predicates/isLiteral";
 
 /**
  * A type that removes the first character from a string literal type `Str`.

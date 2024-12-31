@@ -1,4 +1,4 @@
-import type { IsStringLiteral } from "../isStringLiteral";
+import type { IsStringLiteral } from "../../predicates/isLiteral";
 
 /**
  * A type that checks if the string literal type `S` starts with the string literal type `T`.
