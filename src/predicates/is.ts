@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type {
-  ANY_ERROR,
-  GenericError,
-  NEVER_ERROR,
-  NIL,
-  UNKNOWN_ERROR,
-} from "../types";
+import type { GENERIC_ERROR, NewError, NIL } from "../types";
 import type { Validate$ } from "../validators/validate";
 import type { Predicate } from "./predicate";
 
@@ -14,13 +8,13 @@ export type $IsNever<T> = [T] extends [never] ? true : false;
 // --- Nullability Predicates ---
 // TODO: possible redundancy []
 export type $IsAnyE<T> = [$IsNever<T>] extends [true]
-  ? ANY_ERROR
+  ? NewError<"AnyError", "IsAny", T>
   : 0 extends 1 & T
     ? true
     : false;
 
 export type $IsUnknownE<T> = [$IsNever<T>] extends [true]
-  ? UNKNOWN_ERROR
+  ? NewError<"UnknownError", "IsUnknown", T>
   : 0 extends 1 & T
     ? false
     : [unknown] extends [T]
@@ -53,7 +47,7 @@ high level
 // PTA!!! + callback hell
 type Checked_YourLogic<T> = T extends string ? true : false;
 // monad chain of quarded funcs
-type MonadChain<T> = T extends GenericError ? T : Checked_YourLogic<T>;
+type MonadChain<T> = T extends GENERIC_ERROR ? T : Checked_YourLogic<T>;
 type IsPredX<T> = MonadChain<Validate$<T>>;
 type TestPred = IsPredX<"any">;
 //   ^?
@@ -82,7 +76,11 @@ export type IsOpenType<T> = [T] extends [never] // isNever
 //   ^?
 
 export type IsNil<T> =
-  IsOpenType<T> extends true ? NEVER_ERROR : [T] extends [NIL] ? true : false;
+  IsOpenType<T> extends true
+    ? NewError<"OpenTypeError", "IsNil", T>
+    : [T] extends [NIL]
+      ? true
+      : false;
 
 // --- Empty Predicates ---
 export type IsEmpty<T> =

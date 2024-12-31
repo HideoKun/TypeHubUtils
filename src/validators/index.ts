@@ -1,5 +1,5 @@
 import type { IsError } from "../predicates/isError";
-import type { ANY_ERROR, NEVER_ERROR, UNKNOWN_ERROR } from "../types";
+import type { GENERIC_ERROR, NewError } from "../types";
 
 /*
 -> replace with url to repo
@@ -45,17 +45,17 @@ AndEx<A> extends true
 ? DoABC
 */
 
-export type $InValidateNever<T> = [T] extends [never] ? NEVER_ERROR : T;
+export type $InValidateNever<T> = [T] extends [never] ? GENERIC_ERROR : T;
 
 export type InValidateAny<T> = [IsError<T>] extends [true]
   ? T
   : 0 extends 1 & T
-    ? ANY_ERROR
+    ? NewError<"AnyError", "SliceFront", T>
     : T;
 
 // export type InValidateUnknown<T> = [T] extends [GenericError] // overlap: any to Error
 export type InValidateUnknown<T> = [IsError<T>] extends [true] // this is better, no overlap
   ? T
   : [unknown] extends [T]
-    ? UNKNOWN_ERROR
+    ? NewError<"UnknownError", "SliceFront", T>
     : T;

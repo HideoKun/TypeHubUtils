@@ -1,5 +1,5 @@
 import type { IsStringLiteral } from "../../predicates/isLiteral";
-import type { EXPECT_LITERAL_ERROR } from "../../types";
+import type { NewError } from "../../types";
 
 /**
  * A type that slices the front part of a string literal type `Str` based on the length of `LengthPattern`.
@@ -25,4 +25,4 @@ export type _SliceFront<
 export type SliceFront<Str extends string, Num extends number> =
   IsStringLiteral<Str> extends Str
     ? _SliceFront<Str, Num, []>
-    : EXPECT_LITERAL_ERROR;
+    : NewError<"NonLiteralError", "SliceFront", Str>;

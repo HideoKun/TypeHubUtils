@@ -5,7 +5,7 @@ export type ErrorType =
   | { __type: "NetworkError"; __message: string; __url: string }
   | { __type: "SystemError"; __code: number };
 
-export type GenericError = {
+export type GENERIC_ERROR = {
   readonly __message: string;
   readonly __url: string;
 };
@@ -22,9 +22,19 @@ type ErrorMessages = {
 };
 
 // type ErrorTypes = keyof ErrorMessages;
-
+/**
+ * @see www.wp.pl
+ */
 export type NewError<
-  ErrorType extends keyof ErrorMessages,
+  ErrorType extends
+    | "OpenTypeError"
+    | "NeverError"
+    | "AnyError"
+    | "UnknownError"
+    | "MismatchError"
+    | "OutputError"
+    | "NonLiteralError"
+    | "EmptyStringError",
   Context extends string,
   Value,
 > = {
@@ -50,51 +60,3 @@ export type NewMismatchError<Context extends string, Value> = NewError<
 >;
 
 export type NonErrorObj = object & { __message: never; __url: never }; // type: GenericError
-
-/**
- * @see www.wp.pl
- */
-export interface OPEN_TYPE_ERROR {
-  readonly __message: "input: is open types (any, unknown, never)";
-  readonly __url: "wwww.wp.pl";
-}
-
-/**
- * @see www.wp.pl
- */
-export interface NEVER_ERROR {
-  readonly __message: "input: do not pass never as input";
-  readonly __url: "wwww.wp.pl";
-}
-
-/**
- * @see www.wp.pl
- */
-export interface ANY_ERROR {
-  readonly __message: "input: do not pass any as input";
-  readonly __url: "wwww.wp.pl";
-}
-
-/**
- * @see www.wp.pl
- */
-export interface UNKNOWN_ERROR {
-  readonly __message: "input: do not pass unknown as input";
-  readonly __url: "wwww.wp.pl";
-}
-
-/**
- * @see www.wp.pl
- */
-export interface NON_HOMOGENIC_ERROR {
-  readonly __message: "input: non homogenic union";
-  readonly __url: "wwww.wp.pl";
-}
-
-/**
- * @see www.wp.pl
- */
-export interface EXPECT_LITERAL_ERROR {
-  readonly __message: "input: is non literal";
-  readonly __url: "wwww.wp.pl";
-}
