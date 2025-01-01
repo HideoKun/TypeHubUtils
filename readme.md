@@ -46,18 +46,19 @@
 - **use pre-computed types** (TailWind style) - { "declaration": true,"emitDeclarationOnly": true}
 - **Error** as a feature: use it to communicate with user
 - composition as a solution to complex problems (math, algs)
+- module as 'never' boundary
 
 ```ts
 // Error
 
-type NewOpenTypeError<Value, Context extends string = ''> = {
+type NewError<Value, Context extends string = ''> = {
   __error: `do not use open type  as input`;
   __url: 'www.wp.pl`;
   __value: Value;
   __context?: Context
 }
 
-type In<Value> = NewOpenTypeError<Value, 'In<> validation error'>
+type In<Value> = NewError<Value, 'Input> validation error'>
 ```
 
 ### Other Ideas
@@ -70,6 +71,8 @@ SM: TS standards and micro patterns:
 - upstream computation
 - $ for never (funcs, static types)
 - error with links to docs (good patterns)
+- pipe vs chain(possible with objet config/ values lookup)
+- replace branching wih predates and other funcs
 
 - ## func types (rules): front/ back/ middle validation
 - in/out validation
