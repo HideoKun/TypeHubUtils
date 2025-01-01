@@ -1,4 +1,4 @@
-import type { Str2Arr } from "../str2arr";
+import type { _StrToArr } from "../strToArr/algo";
 
 /**
  * A type that checkes if a substring is a part of a string
@@ -17,7 +17,9 @@ type UpdateAcc<
   Str extends string,
   Match extends string,
   Acc extends string,
-> = Match extends Str2Arr<Str>[Str2Arr<Acc>["length"]] ? `${Acc}${Match}` : "";
+> = Match extends _StrToArr<Str, []>[_StrToArr<Acc, []>["length"]]
+  ? `${Acc}${Match}`
+  : "";
 
 export type _Includes<
   SearchStr extends string,
