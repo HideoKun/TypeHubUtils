@@ -23,58 +23,27 @@
 
 ## Architecture
 
-// PREDICATES RULES
-// - all type should be square, helpers should be singular
-
-### TODO
-
-- union to tuple
-
-- union approach?
-
-- getKeys
-- getReadonlyKeys
-- getOptionalKeys
-
 ### Core Ideas
 
 - Great Docs
 - `strict` is not enough
 - `OpenType` (`any`, `unknown`, `never`) exclusion
-- Error Handling (branded types) as way to communicate to user more than `never`
-- never use `never`, `any` (and `unknown`?)
 - **use pre-computed types** (TailWind style) - { "declaration": true,"emitDeclarationOnly": true}
-- **Error** as a feature: use it to communicate with user
-- composition as a solution to complex problems (math, algs)
-- module as 'never' boundary
-
-```ts
-// Error
-
-type NewError<Value, Context extends string = ''> = {
-  __error: `do not use open type  as input`;
-  __url: 'www.wp.pl`;
-  __value: Value;
-  __context?: Context
-}
-
-type In<Value> = NewError<Value, 'Input> validation error'>
-```
+- **ERROR AS A FEATURE**: use it to communicate with user
+- module as 'never' boundary -> solve all never related issues at module level
 
 ### Other Ideas
 
-SM: TS standards and micro patterns:
+#### SM: TS standards and micro patterns:
 
 - E | T
 - variadic functions
 - PTA
 - upstream computation
 - $ for never (funcs, static types)
-- error with links to docs (good patterns)
 - pipe vs chain(possible with objet config/ values lookup)
 - replace branching wih predates and other funcs
-
-- ## func types (rules): front/ back/ middle validation
+- naming: func validation -> front/ back/ middle validation
 - in/out validation
 - recurrence as snippet/ pattern
 - type function composition
