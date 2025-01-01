@@ -2,7 +2,7 @@ import type {
   ConsistentDeepObj,
   ConsistentSimpleObject,
   InConsistentDeepObj,
-} from "../../../testData";
+} from "../../../../testData";
 
 // TODO: now arr support
 export type DeepValueOfObj<T extends object, Acc = never> = T extends object

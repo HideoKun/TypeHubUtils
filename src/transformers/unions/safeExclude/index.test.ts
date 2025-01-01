@@ -1,6 +1,6 @@
 import { expectTypeOf, it } from "vitest";
 import type { SafeExclude } from ".";
-import type { SimpleUnion } from "../../testData";
+import type { SimpleUnion } from "../../../testData";
 
 it("should work", () => {
   expectTypeOf<"b" | "c">().toEqualTypeOf<SafeExclude<SimpleUnion, "a">>();

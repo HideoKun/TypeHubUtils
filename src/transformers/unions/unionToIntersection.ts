@@ -1,4 +1,4 @@
-import type { ConsistentObjUnion } from "../testData";
+import type { ConsistentObjUnion } from "../../testData";
 
 export type UnionToIntersection<U> =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

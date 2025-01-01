@@ -1,4 +1,4 @@
-import type { StrictObject } from "../../types";
+import type { StrictObject } from "../../../types";
 import type { ValueOf } from "../valueOf";
 
 /**

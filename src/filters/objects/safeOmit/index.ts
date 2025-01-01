@@ -1,5 +1,5 @@
-import type { StrictObject } from "../../types";
-import type { SafeExclude } from "../../unions/safeExclude";
+import type { SafeExclude } from "../../../transformers/unions/safeExclude";
+import type { StrictObject } from "../../../types";
 
 // TODO: add tests for this helper, plain safe omit
 export type _SafeOmit<O extends StrictObject, K extends keyof O> = {

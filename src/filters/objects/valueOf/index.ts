@@ -2,7 +2,7 @@ import type {
   ConsistentDeepArr,
   ConsistentDeepObj,
   ConsistentSimpleObject,
-} from "../../testData";
+} from "../../../testData";
 
 export type ValueOfObj<T extends object> = T[keyof T];
 
@@ -12,8 +12,8 @@ export type ValueOfArr<T extends any[]> = T[number];
 export type ValueOf<T extends object | any[]> = T extends any[]
   ? ValueOfArr<T>
   : T extends object
-  ? ValueOfObj<T>
-  : never;
+    ? ValueOfObj<T>
+    : never;
 
 // TESTS
 type CheckValueOfA = ValueOf<ConsistentSimpleObject>;

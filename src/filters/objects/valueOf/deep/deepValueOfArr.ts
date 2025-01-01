@@ -1,8 +1,8 @@
-import type { ConsistentDeepArr } from "../../../testData";
+import type { ConsistentDeepArr } from "../../../../testData";
 
 export type DeepValueOfArr<
   T extends any[],
-  Acc = never
+  Acc = never,
 > = T extends (infer MaybeArr)[]
   ? MaybeArr extends any[]
     ? DeepValueOfArr<MaybeArr, Acc>
