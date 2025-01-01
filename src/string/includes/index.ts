@@ -7,18 +7,17 @@ import type { Str2Arr } from "../str2arr";
  * @template MatchStr - The substring to check for or substring with wildcard.
  * @returns {true | false} - Returns true if search string is a part of the string or false if its not
  */
-
-export type Includes<MatchStr extends string, Str extends string> =
-  //
-  _Includes<MatchStr, Str, "">;
+export type Includes<MatchStr extends string, Str extends string> = _Includes<
+  MatchStr,
+  Str,
+  ""
+>;
 
 type UpdateAcc<
-  SearchStr extends string,
-  MatchFirst extends string,
-  MatchAccumulator extends string,
-> = MatchFirst extends Str2Arr<SearchStr>[Str2Arr<MatchAccumulator>["length"]]
-  ? `${MatchAccumulator}${MatchFirst}` // build match step by step
-  : "";
+  Str extends string,
+  Match extends string,
+  Acc extends string,
+> = Match extends Str2Arr<Str>[Str2Arr<Acc>["length"]] ? `${Acc}${Match}` : "";
 
 export type _Includes<
   SearchStr extends string,
